@@ -1,0 +1,63 @@
+Introduction Sequence
+Problem 1:
+$ delay 2000
+$ show goal
+$ git commit
+$ git commit
+Problem 2:
+$ delay 2000
+$ show goal
+$ git checkout -b bugFix
+Problem 3:
+$ delay 2000
+$ show goal
+$ git checkout -b bugFix
+$ git commit
+$ git checkout master
+$ git commit
+$ git merge bugFix
+Problem 4:
+$ delay 2000
+$ show goal
+$ git checkout -b bugFix
+$ git commit
+$ git checkout master
+$ git commit
+$ git checkout bugFix
+$ git rebase master
+
+Ramping Up:
+Problem 1:
+$ delay 2000
+$ show goal
+$ git checkout bugFix
+$ git checkout C4
+Problem 2:
+$ delay 2000
+$ show goal
+$ git checkout bugFix
+$ git checkout HEAD^
+Problem 3:
+$ delay 2000
+$ show goal
+$ git checkout C6
+$ git branch -f master HEAD
+$ git checkout bugFix
+$ git branch -f bugFix HEAD~3
+$ git checkout C1
+Problem 4:
+$ delay 2000
+$ show goal
+$ git reset HEAD~1
+$ git checkout pushed
+$ git revert pushed
+
+Moving Work Around:
+Problem 1:
+$ delay 2000
+$ show goal
+$ git cherry-pick C3 C4 C7
+Problem 2:
+$ delay 2000
+$ show goal
+$ git rebase -i HEAD~4
