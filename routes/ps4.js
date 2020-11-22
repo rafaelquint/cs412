@@ -5,6 +5,13 @@ var rp = require('request-promise');
 const fetch = require('node-fetch');
 const ps4Config = require('../config/ps4Config');
 
+const redis =  require('redis');
+const client = redis.createClient();
+const {promisify} = require('util');
+const asyncExists = promisify(client.exists).bind(client);
+const asyncSet = promisify(client.set).bind(client);
+const asyncExpire = promisify(client.expire).bind(client);
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('ps4', { title: 'Hey now' });
@@ -30,7 +37,23 @@ router.post('/player', async (request, response) => {
     let json = await fetch_response.json();
     console.log(json)
     let firststat = json;
-    response.json(firststat);
+    let match = await asyncExists(firststat);
+    if (match) {
+        let response = {
+            json: firststat,
+            cached: true
+        }
+        response.json(response);
+    } else {
+        let status = asyncSet(player, firststat);
+        status = await asyncExpire(player, 15);
+        let response = {
+            json: firststat,
+            cached: false
+        }
+        response.json(response)
+    }
+   // response.json(firststat);
 });
 
 
