@@ -31,27 +31,31 @@ router.post('/player', async (request, response) => {
     }
     let player = request.body.player;
     let api_url = ps4Config.ps4Options.url + player + '%25';
-    console.log(api_url);
   //  let api_url = `http://lookup-service-prod.mlb.com/json/named.search_player_all.bam?sport_code='mlb'&active_sw='Y'&name_part='${player}%25'`;
     let fetch_response = await fetch(api_url);
     let json = await fetch_response.json();
+  //  json = JSON.stringify(json);
+
+
     console.log(json)
-    let firststat = json;
-    let match = await asyncExists(firststat);
+    let firststat = json.toString();
+    console.log(firststat)
+
+    let match = await asyncExists(player);
     if (match) {
-        let response = {
+        let resp = {
             json: firststat,
             cached: true
         }
-        response.json(response);
+        response.json(resp);
     } else {
         let status = asyncSet(player, firststat);
         status = await asyncExpire(player, 15);
-        let response = {
+        let resp = {
             json: firststat,
             cached: false
         }
-        response.json(response)
+        response.json(resp)
     }
    // response.json(firststat);
 });
