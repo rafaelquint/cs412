@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    title= title
+    body
+        form(action='/ps4/player', method='POST')
+            | Input player:
+            br
+            input(type='text', name='player', id='player', placeholder='Enter a player')
+            br
+            input(type='submit', value='Submit')
