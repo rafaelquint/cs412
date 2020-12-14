@@ -1,5 +1,5 @@
 export class SearchPlayer {
-    copyRight: string;
+    copyRight: string | undefined;
     queryResults: {
       created: string;
       totalSize: string;
@@ -33,6 +33,6 @@ export class SearchPlayer {
         team_id: string;
         service_years: string;
         active_sw: string;
-      }
-    };
+      };
+    } | undefined;
 }

@@ -8,11 +8,7 @@ import { cesp} from '../data/cespPs6';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cs411-ps6';
-  cesp: SearchPlayer[] = cesp;
+  constructor () {
 
-  cespFunction() {
-    var currText = document.getElementById("printable");
-    currText.innerHTML = cesp[0].queryResults.row.name_display_first_last;
   }
 }
